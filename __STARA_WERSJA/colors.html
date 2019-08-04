@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title style="color: red">Próbnik kolorów</title>
+    <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        .size {
+            width: 100px;
+            height: 50px;
+            position: relative;
+            margin: 10px;
+            float: left;
+            cursor: pointer;
+            transition: 300ms;
+            transition-timing-function: linear;
+            outline: 0px;
+        }
+
+        .size:hover {
+            transition: 300ms;
+            transition-timing-function: linear;
+            outline: 10px solid;
+            /* margin: 1px; */
+        }
+
+        .color {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-weight: bold;
+        }
+
+        /* Do testów */
+        .hidden {
+            /* visibility: hidden; */
+            /* opacity: 0; */
+            position: absolute;
+            left: -1000px;
+        }
+
+        .module-content {
+            display: none;
+        }
+
+        .module-content-show {
+            display: block;
+        }
+
+        .kolorki {
+            --color: black;
+            width: 200px;
+            height: 200px;
+            /* color: red;     */
+            border: none;
+            outline: none;
+            /* border: 20px solid black; */
+            background: transparent;
+            position: relative;
+        }
+
+        .kolorki span {
+            position: absolute;
+            display: inline-block;
+            color: white;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        body {
+        }
+
+
+    </style>
+</head>
+
+<body>
+    <!-- testy -->
+
+    <input type="text" class="hidden">
+
+    <!-- Koniec testów -->
+</body>
+
+<script>
+    /******************************Testy*********************************/
+    // const btn = document.querySelector(".module-button");
+    // const textCnt = btn.previousElementSibling;
+    // const st = getComputedStyle(textCnt);
+
+    // btn.addEventListener("click", () => textCnt.classList.toggle("module-content-show"));
+    /******************************Koniec Testy*********************************/
+
+
+    const colors = [
+        "#d60000",
+        "#ff5501",
+        "#6e6e6e",
+        "#bd081c",
+        "tomato",
+        "#fc5a61",
+        "#cfcfcf",
+        "#67ae3e",
+        "#82bd61",
+        "#dd4b39",
+        "#f1c026",
+        "#ec5252",
+        "#686f7a",
+        "#f86210",
+        "#fec514",
+        "#16416b",
+        "#66b845",
+        "#366f35",
+        "#3B5998",
+        "white",
+        "white",
+        "#ffd823",
+        "#704825",
+        "#56371b",
+        "#f25141",
+        "#93c524",
+        "#28a8e3",
+        "#a0a0a0",
+        "#ff3249"
+
+    ];
+
+    const fragment = document.createDocumentFragment();
+
+    for (let color of colors) {
+        const div = document.createElement("div");
+        const span = document.createElement("span");
+        /*div*/
+        div.classList.add("size");
+        div.style.outlineColor = color;
+        /*span*/
+        span.classList.add("color");
+        span.textContent = color;
+        div.appendChild(span);
+        div.style.backgroundColor = color;
+        fragment.appendChild(div);
+    }
+
+    document.body.appendChild(fragment);
+
+    const colorShape = [...document.getElementsByClassName("size")];
+    const input = document.querySelector(".hidden");
+
+    colorShape.forEach(el => {
+        el.addEventListener("click", () => {
+            input.value = el.textContent;
+            input.select();
+            document.execCommand("copy");
+        });
+    });
+
+
+    /***************************************************************/
+    let counter = 0;
+
+    function insertBefore() {
+        counter++;
+        const strong = this.firstElementChild; //pobieramy pierwsze dziecko p czyli element <strong>
+        const text = typeof strong;
+        const newNode = document.createElement("span"); //tworzymy nowy nod z tekstem
+        newNode.innerText = `Inny element ${counter} :: ${text}\n`;
+
+        this.insertBefore(newNode, strong); //wstawiamy go przed <strong>
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        document.querySelector("#beforeTestP").addEventListener("click", insertBefore);
+    });
+
+    const inputColor = document.querySelector("#color");
+    console.log(inputColor);
+    const spanColor = document.querySelector(".kolorki span");
+    console.log(spanColor);
+
+    inputColor.addEventListener("click", function (e) {
+        e.preventDefault();
+        inputColor.click();
+
+    });
+
+    inputColor.addEventListener("change", function () {
+        // this.value;
+        spanColor.textContent = this.value;
+    });
+
+    /***************************************************************/
+</script>
+
+</html>
+11:45
