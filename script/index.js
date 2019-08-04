@@ -1,0 +1,1 @@
+document.addEventListener("DOMContentLoaded", () => new Colors(colors, "colors").viewRender("root"));

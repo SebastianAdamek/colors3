@@ -1,0 +1,38 @@
+.colors {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+
+    &__input-hidden {
+        position: absolute;
+        left: -1000px;
+    }
+
+    &__item {
+        @include box(100px, 50px);
+        position: relative;
+        flex-grow: 1;
+        margin: 10px;
+        cursor: pointer;
+        color: $color-item;
+
+        transition: {
+            timing-function: linear;
+            duration: 0.3s;
+        }
+
+        font: {
+            family: Arial, Helvetica, sans-serif;
+            weight: bold;
+            size: 2rem;
+        }
+
+        &:hover {
+            outline: 10px solid;
+        }
+    }
+
+    &__number {
+        @include center-item();
+    }
+}
